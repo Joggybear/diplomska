@@ -1,0 +1,17 @@
+@import '../../../../theme/colors.scss';
+
+.modal{
+    .modal-dialog{
+        .modal-content{
+            .modal-body{
+                .form{
+                    .form-group{
+                        .text-area{
+                            max-height: 200px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

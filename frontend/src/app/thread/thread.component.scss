@@ -1,0 +1,44 @@
+@import '../../theme/colors.scss';
+.container-fluid {
+	.title {
+		top: 50%;
+		position: relative;
+		transform: translateY(-50%);
+	}
+	.table {
+		background-color: $white-color;
+		tr {
+			td,
+			th {
+				vertical-align: middle !important;
+				height: 45px;
+				border-top: none;
+				border-bottom: 1px solid $border-gray;
+			}
+			th {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				border-width: 2px;
+			}
+			.last-info {
+				i {
+					position: relative;
+					top: 50%;
+					transform: translateY(-50%);
+				}
+				.info {
+					display: inline-block !important;
+					.name {
+						font-size: 15px;
+						display: block;
+					}
+					.date {
+						font-size: 13px;
+						display: block;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,74 @@
+<div class="container-fluid">
+  <div class="row justify-content-center top-buffer">
+    <div class="col-11">
+
+      <div class="row justify-content-between">
+        <div class="col-3">
+          <h4 class="title">{{(thread | async)?.title}}</h4>
+        </div>
+        <div class="col-3 text-right">
+          <button class="btn btn-style" (click)="createComment()">Create Comment</button>
+        </div>
+      </div>
+
+      <div class="row justify-content-between top-buffer">
+        <div class="col-12">
+          <div class="content-header">
+            <i class="fa fa-clock-o" aria-hidden="true"></i> {{(thread | async)?.created | date:'MMM d, y'}}
+          </div>
+        </div>
+      </div>
+      <div class="row comment-wrapper">
+        <div class="col-2 text-center">
+          <div class="user-info">
+            <span class="arrow">
+              <span></span>
+            </span>
+            <p class="username">
+              {{(thread | async)?.creator}}
+            </p>
+            <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="col-10 content">
+          {{(thread | async)?.content}}
+        </div>
+      </div>
+
+      <div *ngFor="let comment of (thread | async)?.comments">
+
+        <div class="row top-buffer">
+          <div class="col-12">
+            <div class="content-header">
+              <i class="fa fa-clock-o" aria-hidden="true"></i> {{comment.created | date:'MMM d, y'}}
+              <div *ngIf="currentId === comment.creatorId" class="header-right">
+                <i class="fa fa-pencil fa-lg selectable" aria-hidden="true" (click)="createComment.show(thread)"></i>
+                <i class="fa fa-trash fa-lg selectable" aria-hidden="true" (click)="deleteComment(comment.commentId, comment.threadId)"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row comment-wrapper">
+          <div class="col-2 text-center">
+            <div class="user-info">
+              <span class="arrow">
+                <span></span>
+              </span>
+              <p class="username">
+                {{comment.creator}}
+              </p>
+              <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="col-10 content">
+            {{comment.content}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<app-create-comment-modal #createCommentModal="bs-modal"></app-create-comment-modal>
+<app-error-modal #error="bs-modal"></app-error-modal>

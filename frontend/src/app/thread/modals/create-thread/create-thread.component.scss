@@ -1,0 +1,52 @@
+@import '../../../../theme/colors.scss';
+
+.modal{
+    .modal-dialog{
+        .modal-content{
+            .modal-body{
+                .form{
+                    .form-group{
+                        .text-area{
+                            max-height: 200px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+// .modal {
+//     text-align: center;
+//     .modal-dialog {
+//         width: 600px;
+//         display: inline-block;
+//         text-align: left;
+//         vertical-align: middle;
+//         .modal-content {
+//             background-color: $background-gray;
+//             .modal-header {
+//                 height: 50px;
+//                 text-align: center;
+//                 border-color: $text-gray;
+//                 .modal-title {
+//                     margin: 0 auto;
+//                     line-height: 20px;
+//                     font-size: 18px;
+//                     font-weight: 600;
+//                 }
+//             }
+//             .form {
+//                 background-color: $white-color;
+//                 padding: 20px;
+//                 margin: 10px;
+//                 .form-group {
+//                     label {
+//                         line-height: 30px;
+//                         margin-bottom: 0px;
+//                         font-weight: 600;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }

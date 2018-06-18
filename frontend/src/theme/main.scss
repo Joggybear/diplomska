@@ -1,0 +1,25 @@
+@import './colors.scss';
+@import './mixins.scss';
+
+html,
+body {
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
+    color: $text-gray;
+    background-color: $background-gray;
+}
+.selectable{
+    cursor: pointer;
+}
+.top-buffer{
+    margin-top: 10px;
+}
+.btn-style{
+    background-color: $button-purple;
+    color: $white-color;
+    border-color: $button-border-purple;
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.1rem rgba(132, 38, 64, 0.5);
+    }
+}

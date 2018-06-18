@@ -1,0 +1,56 @@
+@import '../../../theme/colors.scss';
+
+.container-fluid{
+    .title{
+        top: 50%;
+        position: relative;
+        transform: translateY(-50%);
+    }
+    .content-header{
+        background-color: $white-color;
+        font-size: 14px;
+        padding: 8px 15px;
+        max-height: 40px;
+        border-bottom: 2px solid $button-purple;
+        .header-right{
+            float: right;
+            i{
+                padding: 0px 5px;
+            }
+        }
+    }
+    .comment-wrapper{
+        min-height: 150px;
+        .user-info{
+            height: 100%;
+            padding-top: 10px;
+            background-color: $white-color;
+            border-right: 2px solid $button-purple;
+            .username{
+                font-weight: bold;
+            }
+            .arrow{
+                position: absolute;
+                top: 30px;
+                right: 15px;
+                border: 10px solid transparent;
+                border-right-color: $button-purple;
+                -moz-border-right-colors: $button-purple;
+                border-left: none;
+                span{
+                        position: absolute;
+                        top: -10px;
+                        left: 2px;
+                        border: 10px solid transparent;
+                        border-right-color: $background-gray;
+                        -moz-border-right-colors: $background-gray;
+                        border-left: none;
+                }
+            }
+        }
+        .content{
+            height: 100%;
+            padding: 10px;
+        }
+    }
+}
