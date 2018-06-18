@@ -1,0 +1,9 @@
+node_modules/
+bin/
+.serverless/
+**/*.js
+**/*.js.map
+**/.DS_Store
+# **/*.d.ts
+.DS_Store
+serverless.yml

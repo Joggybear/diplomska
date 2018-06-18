@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "lib": ["es6"],
+        "target": "es6",
+        "module": "commonjs",
+        "moduleResolution": "node",
+
+        "noImplicitAny": false,
+        "sourceMap": true,
+        "watch": false,
+        "allowJs": false,
+        "alwaysStrict": true,
+        "forceConsistentCasingInFileNames": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noUnusedLocals": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
