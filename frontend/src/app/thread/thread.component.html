@@ -41,7 +41,7 @@
                 </td>
                 <td class="text-right">
                   <div *ngIf="currentId === thread.creatorId">
-                    <i class="fa fa-pencil fa-2x selectable" aria-hidden="true" (click)="createThread.show(thread)"></i>
+                    <i class="fa fa-pencil fa-2x selectable" aria-hidden="true" (click)="createThreadComponent.show(thread)"></i>
                     <i class="fa fa-trash fa-2x selectable" aria-hidden="true" (click)="deleteThread(thread.threadId)"></i>
                   </div>
                 </td>

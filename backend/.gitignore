@@ -6,4 +6,3 @@ bin/
 **/.DS_Store
 # **/*.d.ts
 .DS_Store
-serverless.yml

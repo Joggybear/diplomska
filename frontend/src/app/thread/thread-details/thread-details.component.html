@@ -42,7 +42,7 @@
             <div class="content-header">
               <i class="fa fa-clock-o" aria-hidden="true"></i> {{comment.created | date:'MMM d, y'}}
               <div *ngIf="currentId === comment.creatorId" class="header-right">
-                <i class="fa fa-pencil fa-lg selectable" aria-hidden="true" (click)="createComment.show(thread)"></i>
+                <i class="fa fa-pencil fa-lg selectable" aria-hidden="true" (click)="createComment(comment)"></i>
                 <i class="fa fa-trash fa-lg selectable" aria-hidden="true" (click)="deleteComment(comment.commentId, comment.threadId)"></i>
               </div>
             </div>

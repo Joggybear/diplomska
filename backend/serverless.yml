@@ -1,0 +1,166 @@
+#################################################################################
+# DIPLOMSKA DEV 
+#################################################################################
+# DEPLOY PROCEDURE (Exec in project workspace dir)
+# -------------------------------------------------------------------------------
+# $ nvm use v6.10.2
+# $ rm -r .serverless/
+# $ node --version # v6.10.2
+# $ sls --version  # 1.14.0
+# $ rm -r ./node_modules
+# $ npm i
+# $ tsc
+# $ sls deploy
+
+#################################################################################
+
+service: diplomska
+frameworkVersion: "1.23.0"
+
+provider:
+  name: aws
+  region: eu-west-1
+  account: 420639760093
+  stage: dev
+  runtime: nodejs6.10
+  memorySize: 128 # optional, default is 1024
+  timeout: 60 # optional, default is 6
+
+  environment:
+    STAGE: ${self:service}-${opt:stage, self:provider.stage}
+    LOG_LEVEL: INFO
+  
+  # permissions for all functions
+  iamRoleStatements: 
+    - Effect: Allow
+      Action: # Gives permission to DynamoDB tables in a specific region
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:GetRecords
+        - dynamodb:GetShardIterator
+        - dynamodb:DescribeStream
+        - dynamodb:ListStreams
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:*"
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+      Resource: "arn:aws:lambda:${opt:region, self:provider.region}:*:*"
+
+package:
+  exclude:
+    # Dev dependencies and types
+    - "node_modules/@types/**"
+    # Test files
+    - "test/**"
+    - "files/**"
+    - "bugs/**"
+    - "demo/**"
+
+
+#################################################################################
+# Lambda Functions
+#################################################################################
+functions:
+  # --- Thread ---------------------------------------------------------------
+  thread-service:
+    handler: aws/thread.lambda
+    events:
+      - http: # Query
+          path:  threads
+          method: GET
+          cors: true
+      - http: # Get
+          path:  threads/{threadId}
+          method: GET
+          cors: true
+      - http: # Create
+          path: threads
+          method: POST
+          cors: true
+      - http: # Update
+          path: threads/{threadId}
+          method: PUT
+          cors: true
+      - http: # Delete
+          path: threads/{threadId}
+          method: DELETE
+          cors: true
+  # --- Comments ---------------------------------------------------------------
+  comment-service:
+    handler: aws/comment.lambda
+    events:
+      - http: # Query
+          path:  comments
+          method: GET
+          cors: true
+      - http: # Query
+          path:  comments/{threadId}/{commentId}
+          method: GET
+          cors: true
+      - http: # Create
+          path: comments
+          method: POST
+          cors: true
+      - http: # Update
+          path: comments/{threadId}/{commentId}
+          method: PUT
+          cors: true
+      - http: # Delete
+          path: comments/{threadId}/{commentId}
+          method: DELETE
+          cors: true
+
+#################################################################################      
+# The "Resources" your "Functions" use.  Raw AWS CloudFormation goes in here.
+#################################################################################
+resources:
+  Resources:
+    # --- THREAD --------------------------------------------------------------
+    ThreadTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-${opt:stage, self:provider.stage}-Thread
+        AttributeDefinitions:
+          - AttributeName: ThreadId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: ThreadId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    # --- COMMENT --------------------------------------------------------------
+    CommentTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-${opt:stage, self:provider.stage}-Comment
+        AttributeDefinitions:
+          - AttributeName: CommentId
+            AttributeType: S
+          - AttributeName: ThreadId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: CommentId
+            KeyType: HASH
+          - AttributeName: ThreadId
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        GlobalSecondaryIndexes:
+          - IndexName: Thread-index
+            KeySchema:
+              - AttributeName: ThreadId
+                KeyType: HASH
+              - AttributeName: CommentId
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1 

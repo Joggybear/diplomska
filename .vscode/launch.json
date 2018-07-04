@@ -17,10 +17,13 @@
             "type": "node",
             "request": "launch",
             "name": "Local",
-            "program": "${workspaceRoot}/local/main.ts",
+            "program": "${workspaceRoot}/backend/local/main.ts",
             "cwd": "${workspaceRoot}",
             "sourceMaps": true,
-            "preLaunchTask": "tsc"
+            "preLaunchTask": "tsc",
+            "outFiles": [
+                "${workspaceFolder}/backend/**/*.js"
+            ]
         }
     ]
 }
