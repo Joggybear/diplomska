@@ -20,7 +20,7 @@ frameworkVersion: "1.14.0"
 provider:
   name: aws
   region: eu-west-1
-  account: 420639760093
+  profile: development
   stage: dev
   runtime: nodejs6.10
   memorySize: 128 # optional, default is 1024
