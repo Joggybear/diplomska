@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "deploy": "serverless deploy"
+    "deploy": "tsc && serverless deploy --aws-profile personal"
   },
   "dependencies": {
     "aws-sdk": "^2.188.0",
