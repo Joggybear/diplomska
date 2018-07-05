@@ -15,7 +15,7 @@
 #################################################################################
 
 service: diplomska
-frameworkVersion: "1.23.0"
+frameworkVersion: "1.14.0"
 
 provider:
   name: aws
